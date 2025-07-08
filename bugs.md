@@ -2,66 +2,139 @@
 
 ## Task: Booking Flow Bug & UX Audit
 
-### 1) Chat Bot
+### 1) Chatbot
 
-- Nowadays, people use GenAI chatbots; yours feels too robotic.
+- Nowadays, users expect a more conversational GenAI-powered chatbot, but yours feels robotic.
 
-<!-- ![Chat box screenshot](./images/image.png) -->
+![Chat box screenshot](./images/image.png)
+Suggestions:
 
-- Suggestions
-  - "Plan Your Trip with Us?" should be a statement, not a question.
-  - You can change the profile picture and give the chatbot a beautiful name.
-  - Try to add a GenAI solution to make it more human-like and engaging to interact with.
+- Change "Plan Your Trip with Us?" to a friendly statement like "Let us help you plan your trip!"
 
-### 2) Spacing at eVisa Section
+- Update the chatbot's profile picture and give it a human-like name to increase engagement.
 
-- Spacing can be improved.
-- The price in dollars and INR should be bold, and you can use the INR icon as a tag.
-<!-- ![spacing at eVisa page](./images/image1.png) -->
+- Integrate a GenAI solution to make the interaction more natural and personalized.
 
-- No one is going to read all this; they will just do as shown in the video.
+### 2) eVisa Section – Spacing & UX
 
-<!-- <video controls src="./images/20250707-1550-16.1426639.mp4" title="Long Text"></video> -->
+The spacing can be significantly improved.
 
-- Solution
-  - You can categorize the text data and fit it into a smaller area so that users don't have to scroll as much.
-  - You should implement this even if the user doesn't search for anything.
-  - You should also change the spacing and font to make it look better.
+- The prices in USD and INR should be bold, and the INR value can be styled using an icon or tag.
 
-<!-- ![Category option which is available by default](./images/image2.png) -->
+![spacing at eVisa page](./images/image1.png)
 
-- When we select any country, the image you are loading takes more time, which makes your website slow.
-  - You can upload all the assets to Cloudinary or any platform that gives you a public access link for each image, and store all those URLs in a Redis cache so that users don't feel any lag.
+- Most users won't read long paragraphs; they'll just follow visual cues (as shown in the video).
+
+<video controls src="./images/20250707-1550-16.1426639.mp4" title="Long Text"></video>
+
+- Suggestions:
+
+  - Break down long text into clear categories or sections.
+
+  - Display relevant content even before the user initiates a search.
+
+  - Improve font style and line spacing for readability.
+
+- When selecting a country, images take time to load, making the site feel slow.
+
+- Consider hosting images on Cloudinary or a similar CDN.
+
+- Use Redis caching to store URLs and improve image-loading speed.
 
 ### 3) Network Logs
 
-<!-- ![Browser Network Section](./images/image3.png) -->
+![Browser Network Section](./images/image3.png)
 
-- Check this network log to see how many requests it makes to the server.
-- If you see something named _collect_ which makes requests again and again, it just increases your bandwidth cost. It looks like you are polling, but this can be avoided by using a WebSocket.
-- There are many more requests that you can avoid by using SVGs for your logo, dropdown, social media icons, and many more.
+- Check the browser’s network tab to review how many requests your site is making.
 
-### 4) Login problem
+- If \_collect or similar APIs are polling repeatedly, it unnecessarily increases your bandwidth cost.
 
-<!-- ![Login Problem](./images/image4.png) -->
+- Replace polling with WebSockets for real-time updates.
 
-- If a user enters the wrong password, why is there text in the password field? They have to delete the text first, which makes the experience bad.
+- Reduce requests by replacing static assets (logos, icons, etc.) with inline SVGs for faster rendering.
 
-### 5) Hotel loading Skelton
+### 4) Login Field Issue
 
-<!-- ![alt text](./images/image5.png) -->
+![Login Problem](./images/image4.png)
 
-- It looks too hard and has sharp edges. You can make them a little more rounded to give a premium feel.
+- When a user enters the wrong password, the password field retains the text, which is poor UX.
+
+- It forces the user to manually delete the input before trying again.
+
+- The field should automatically clear on failure.
+
+### 5) Hotel Loading Skeleton
+
+![alt text](./images/image5.png)
+
+- The current loading skeleton has sharp edges and feels harsh.
+
+- Use rounded corners and softer colors to give a more premium and friendly appearance.
 
 ### 6) Filters
 
-<!-- ![alt text](./images/image6.png) -->
+![alt text](./images/image6.png)
 
-- When users apply filters, they stack up in a very small space and ruin the experience. You can redesign this so that it doesn't bother them.
+- Applied filters appear stacked and cramped in a small space, making the UI look cluttered.
 
-### Responivenes
+- Redesign the filter UI to be cleaner and collapsible, so it doesn't overwhelm the user.
 
-<!-- ![alt text](./images/image7.png) -->
+### 7) Responsiveness (Tablet View)
 
-- In the tablet section, the UI feels a bit odd as it does not have padding on the left and right.
-- It's too cluttered, which does not follow design principles that emphasize the importance of spacing. Proper spacing makes users comfortable and creates a good experience. Too much information will confuse and distract users.
+![alt text](./images/image7.png)
+
+- On tablets, the layout lacks left and right padding, making the content look squished.
+
+- The UI feels cluttered and dense, violating basic design principles.
+
+- Add proper spacing to improve readability and comfort.
+
+- Avoid overloading the screen with information — prioritize what's essential.
+
+![Screen Shot of cluttered hotel list](./images/image8.png)
+
+- For example, the "Room Details" section takes up unnecessary space.
+
+- Instead, move that information into the title area or a collapsible section.
+
+### 8) Search Box Behavior
+
+<video controls src="./images/20250708-1628-30.5918105.mp4" title="Title"></video>
+
+- When clicking inside the search box, the cursor appears at the beginning of pre-filled text.
+
+- Ideally, the input should be empty on focus to reduce confusion and friction.
+
+### 9) FAQ Section
+
+<video controls src="./images/20250708-1710-01.0279569.mp4" title="Title"></video>
+
+- The FAQ section currently looks like a textbook, which discourages users from engaging.
+
+- Use accordion/dropdown elements to display answers in a simpler, interactive format.
+
+![Screen shot of footer](./images/image9.png)
+
+- The layout is messy and inconsistent — clean up the alignment, spacing, and text styles.
+
+### 10) Pop-ups
+
+- Using alert() is not recommended for production apps:
+
+- It's synchronous and blocking, freezing the UI until dismissed.
+
+- No styling or customization is possible.
+
+- Inconsistent behavior across browsers and devices.
+
+- Poor modern UX — feels outdated and intrusive.
+
+- Suggestion:
+  Use custom-designed modals instead (e.g., with libraries like SweetAlert2, Bootstrap modals, or custom React components).
+
+⭐ Additional Suggestions
+
+![Screen Shot when i select 1 star](./images/image10.png)
+Add a fun touch:
+
+"We care about your experience — that's why we don’t recommend 1-star hotels 😊"
